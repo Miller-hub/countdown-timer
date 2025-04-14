@@ -84,6 +84,12 @@ function calculateCustom() {
 }
 
 // 顯示今日日期
+  const today = new Date();
+  const formattedToday = `${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}`;
+  document.getElementById("todayInfo-exam").textContent = `今天是：${formattedToday}`;
+  document.getElementById("todayInfo-holiday").textContent = `今天是：${formattedToday}`;
+  document.getElementById("todayInfo-custom").textContent = `今天是：${formattedToday}`;
+
 document.addEventListener("DOMContentLoaded", () => {
   const now = new Date();
   const formatted = `${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()}`;
