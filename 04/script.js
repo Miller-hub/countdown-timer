@@ -2,7 +2,9 @@ function showTab(id) {
   document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
   document.getElementById(id).classList.add("active");
 
-  document.querySelectorAll(".tabs button").forEach(btn => btn.classList.remove("active-tab"));
+  ["exam", "holiday", "custom"].forEach(name => {
+    document.getElementById("tab-" + name).classList.remove("active-tab");
+  });
   document.getElementById("tab-" + id).classList.add("active-tab");
 }
 
@@ -14,16 +16,16 @@ const exams = [
 ];
 
 const holidays = [
-  { name: "元旦", month: 1, day: 1 },
-  { name: "春節除夕", month: 2, day: 16 },
-  { name: "春節初一", month: 2, day: 17 },
-  { name: "和平紀念日", month: 2, day: 28 },
-  { name: "清明節", month: 4, day: 4 },
-  { name: "兒童節", month: 4, day: 4 },
-  { name: "勞動節", month: 5, day: 1 },
-  { name: "端午節", month: 6, day: 19 },
-  { name: "中秋節", month: 9, day: 24 },
-  { name: "國慶日", month: 10, day: 10 }
+  { name: "元旦", date: "2026-01-01" },
+  { name: "春節除夕", date: "2026-02-16" },
+  { name: "春節初一", date: "2026-02-17" },
+  { name: "和平紀念日", date: "2026-02-28" },
+  { name: "清明節", date: "2026-04-04" },
+  { name: "兒童節", date: "2026-04-04" },
+  { name: "勞動節", date: "2026-05-01" },
+  { name: "端午節", date: "2026-06-19" },
+  { name: "中秋節", date: "2026-09-24" },
+  { name: "國慶日", date: "2026-10-10" }
 ];
 
 function daysUntil(dateStr) {
@@ -38,36 +40,29 @@ function formatDate(dateStr) {
   return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`;
 }
 
-function renderList(data, elementId, storageKey) {
+// 使用者可自選主考試，儲存在 localStorage
+function renderList(data, elementId) {
   const list = document.getElementById(elementId);
-  const currentHighlight = localStorage.getItem(storageKey);
+  const currentHighlight = localStorage.getItem("highlightExamName");
   list.innerHTML = "";
-
   data.forEach(item => {
     const li = document.createElement("li");
-
-    const today = new Date();
-    const targetDate = item.date
-      ? new Date(item.date)
-      : (() => {
-          let thisYear = new Date().getFullYear();
-          let eventDate = new Date(thisYear, item.month - 1, item.day);
-          if (eventDate < today.setHours(0, 0, 0, 0)) {
-            eventDate = new Date(thisYear + 1, item.month - 1, item.day);
-          }
-          return eventDate;
-        })();
-
-    li.textContent = `${item.name}：${daysUntil(targetDate)}（${formatDate(targetDate)}）`;
+    li.textContent = `${item.name}：${daysUntil(item.date)}（${formatDate(item.date)}）`;
 
     if (item.name === currentHighlight) {
       li.classList.add("highlight-exam");
     }
 
-    li.onclick = () => {
-      localStorage.setItem(storageKey, item.name);
-      renderList(data, elementId, storageKey);
-    };
+    if (elementId === "examList") {
+      const btn = document.createElement("span");
+      btn.textContent = "★ 設為主考試";
+      btn.className = "mark-btn";
+      btn.onclick = () => {
+        localStorage.setItem("highlightExamName", item.name);
+        renderList(data, elementId);
+      };
+      li.appendChild(btn);
+    }
 
     list.appendChild(li);
   });
@@ -83,15 +78,8 @@ function calculateCustom() {
   }
 }
 
-// 顯示今日日期
-document.addEventListener("DOMContentLoaded", () => {
-  const now = new Date();
-  const formatted = `${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()}`;
-  document.getElementById("todayInfo").textContent = `今天是：${formatted}`;
-});
-
-renderList(exams, "examList", "highlightExam");
-renderList(holidays, "holidayList", "highlightHoliday");
+renderList(exams, "examList");
+renderList(holidays, "holidayList");
 
 window.addEventListener("load", () => {
   const prompt = document.getElementById("pwaPrompt");

@@ -2,42 +2,41 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>倒數計日器｜考試、節日、自訂</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>倒數計日器｜考試、節日、自訂倒數</title>
+  <meta name="description" content="倒數各種重要日子：學測、統測、會考、節日與自訂事件，一目了然。">
+  <meta name="theme-color" content="#3498db" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
     <h1>倒數計日器</h1>
-    <nav class="tabs">
+    <div class="tabs">
       <button id="tab-exam" onclick="showTab('exam')">考試倒數</button>
       <button id="tab-holiday" onclick="showTab('holiday')">節日倒數</button>
       <button id="tab-custom" onclick="showTab('custom')">自訂倒數</button>
-    </nav>
+    </div>
   </header>
 
   <main>
-    <section id="exam" class="tab active">
+    <section id="exam" class="tab active fade">
       <h2>考試倒數</h2>
-      <p class="hint">👉 點一下項目可設為主考試</p>
       <ul id="examList"></ul>
     </section>
 
-    <section id="holiday" class="tab">
+    <section id="holiday" class="tab fade">
       <h2>節日倒數</h2>
-      <p class="hint">👉 點一下項目可設為主節日</p>
       <ul id="holidayList"></ul>
     </section>
 
-    <section id="custom" class="tab">
+    <section id="custom" class="tab fade">
       <h2>自訂倒數</h2>
       <input type="date" id="customDate" />
       <button onclick="calculateCustom()">開始倒數</button>
       <p id="customResult"></p>
     </section>
 
-    <p id="todayInfo"></p>
-    <p class="pwa-hint" id="pwaPrompt"></p>
+    <p id="pwaPrompt" class="pwa-hint"></p>
   </main>
 
   <script src="script.js"></script>
