@@ -38,7 +38,7 @@ function formatDate(dateStr) {
   return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`;
 }
 
-function renderListWithHint(data, elementId, storageKey, hintId) {
+function renderList(data, elementId, storageKey) {
   const list = document.getElementById(elementId);
   const currentHighlight = localStorage.getItem(storageKey);
   list.innerHTML = "";
@@ -66,11 +66,10 @@ function renderListWithHint(data, elementId, storageKey, hintId) {
 
     li.onclick = () => {
       localStorage.setItem(storageKey, item.name);
-      renderListWithHint(data, elementId, storageKey, hintId);
+      renderList(data, elementId, storageKey);
     };
 
     list.appendChild(li);
-    if (hintId) document.getElementById(hintId).textContent = "已選擇：" + item.name;
   });
 }
 
@@ -88,13 +87,11 @@ function calculateCustom() {
 document.addEventListener("DOMContentLoaded", () => {
   const now = new Date();
   const formatted = `${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()}`;
-  document.getElementById("todayInfo-exam").textContent = formatted;
-  document.getElementById("todayInfo-holiday").textContent = formatted;
-  document.getElementById("todayInfo-custom").textContent = `今天是：${formatted}`;
+  document.getElementById("todayInfo").textContent = `今天是：${formatted}`;
 });
 
-renderListWithHint(exams, "examList", "highlightExam", "examHint");
-renderListWithHint(holidays, "holidayList", "highlightHoliday", "holidayHint");
+renderList(exams, "examList", "highlightExam");
+renderList(holidays, "holidayList", "highlightHoliday");
 
 window.addEventListener("load", () => {
   const prompt = document.getElementById("pwaPrompt");
