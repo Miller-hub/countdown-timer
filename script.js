@@ -87,7 +87,9 @@ function calculateCustom() {
 document.addEventListener("DOMContentLoaded", () => {
   const now = new Date();
   const formatted = `${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()}`;
-  document.getElementById("todayInfo").textContent = `今天是：${formatted}`;
+    document.getElementById("todayInfo-exam").textContent = `今天是：${formatted}`;
+  document.getElementById("todayInfo-holiday").textContent = `今天是：${formatted}`;
+  document.getElementById("todayInfo-custom").textContent = `今天是：${formatted}`;
 });
 
 renderList(exams, "examList", "highlightExam");
@@ -96,6 +98,6 @@ renderList(holidays, "holidayList", "highlightHoliday");
 window.addEventListener("load", () => {
   const prompt = document.getElementById("pwaPrompt");
   if (window.matchMedia('(display-mode: browser)').matches) {
-    prompt.textContent = "📲 小提示：你可以將此工具加入主畫面，像 App 一樣使用！";
+    prompt.textContent = "你可以將此工具加入主畫面，像 App 一樣使用！";
   }
 });

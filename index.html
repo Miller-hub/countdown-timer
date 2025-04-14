@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -18,25 +19,28 @@
 
   <main>
     <section id="exam" class="tab active">
+      <div class="today-line"><span id="todayInfo-exam"></span></div>
       <h2>考試倒數</h2>
       <p class="hint">👉 點一下項目可設為主考試</p>
       <ul id="examList"></ul>
     </section>
 
     <section id="holiday" class="tab">
+      <div class="today-line"><span id="todayInfo-holiday"></span></div>
       <h2>節日倒數</h2>
       <p class="hint">👉 點一下項目可設為主節日</p>
       <ul id="holidayList"></ul>
     </section>
 
     <section id="custom" class="tab">
+      <div class="today-line"><span id="todayInfo-custom"></span></div>
       <h2>自訂倒數</h2>
+      <p class="hint">請選擇你想倒數的日期</p>
       <input type="date" id="customDate" />
       <button onclick="calculateCustom()">開始倒數</button>
       <p id="customResult"></p>
     </section>
 
-    <p id="todayInfo"></p>
     <p class="pwa-hint" id="pwaPrompt"></p>
   </main>
 

@@ -90,9 +90,10 @@ li.highlight-exam {
   color: #888;
   margin-top: 30px;
 }
-#todayInfo {
-  text-align: center;
+.today-line {
+  text-align: right;
   font-size: 0.95rem;
-  margin-top: 20px;
   color: #444;
+  padding-right: 12px;  /* ⭐️ 加這行讓文字與右邊有間距 */
+  margin-bottom: 6px;
 }

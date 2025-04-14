@@ -84,12 +84,6 @@ function calculateCustom() {
 }
 
 // 顯示今日日期
-  const today = new Date();
-  const formattedToday = `${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}`;
-  document.getElementById("todayInfo-exam").textContent = `今天是：${formattedToday}`;
-  document.getElementById("todayInfo-holiday").textContent = `今天是：${formattedToday}`;
-  document.getElementById("todayInfo-custom").textContent = `今天是：${formattedToday}`;
-
 document.addEventListener("DOMContentLoaded", () => {
   const now = new Date();
   const formatted = `${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()}`;
@@ -102,6 +96,6 @@ renderList(holidays, "holidayList", "highlightHoliday");
 window.addEventListener("load", () => {
   const prompt = document.getElementById("pwaPrompt");
   if (window.matchMedia('(display-mode: browser)').matches) {
-    prompt.textContent = "📲 小提示：你可以將此工具加入主畫面，像 App 一樣使用！";
+    prompt.textContent = "你可以將此工具加入主畫面，像 App 一樣使用！";
   }
 });
