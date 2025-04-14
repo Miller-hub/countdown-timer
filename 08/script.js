@@ -38,7 +38,7 @@ function formatDate(dateStr) {
   return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`;
 }
 
-function renderList(data, elementId, storageKey) {
+function renderListWithHint(data, elementId, storageKey, hintId) {
   const list = document.getElementById(elementId);
   const currentHighlight = localStorage.getItem(storageKey);
   list.innerHTML = "";
@@ -70,7 +70,7 @@ function renderList(data, elementId, storageKey) {
     };
 
     list.appendChild(li);
-    
+    if (hintId) document.getElementById(hintId).textContent = "已選擇：" + item.name;
   });
 }
 
@@ -93,8 +93,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("todayInfo-custom").textContent = `今天是：${formatted}`;
 });
 
-renderList(exams, "examList", "highlightExam");
-renderList(holidays, "holidayList", "highlightHoliday");
+renderListWithHint(exams, "examList", "highlightExam", "examHint");
+renderListWithHint(holidays, "holidayList", "highlightHoliday", "holidayHint");
 
 window.addEventListener("load", () => {
   const prompt = document.getElementById("pwaPrompt");
